@@ -16,6 +16,7 @@ html, body {
   justify-content: center;
   align-items: center;
   display: flex;
+  overflow-x: hidden;
 }
 
 .game {
@@ -49,20 +50,11 @@ html, body {
     bottom: 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .game {
         width: 90%;
-        height: 200px;
-    }
-
-    .dino {
-        height: 40px;
-        width: 40px;
-    }
-
-    .cactus {
-        width: 30px;
-        height: 60px;
+        height: auto;
+        max-width: 100%;
     }
 }
 
