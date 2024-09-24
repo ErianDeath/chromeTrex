@@ -1,0 +1,78 @@
+@keyframes slideRight {
+    from {
+        background-position: -10000%;
+    }
+    to {
+        background-position: 0%;
+    }
+}
+
+html, body {
+  margin: 0;
+  padding: 20px; /* Add some padding to the body */
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgb(250, 250, 250);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.game {
+    width: 700px;
+    height: 300px;
+    background-image: url("t-rex-background.png");
+    background-size: auto;
+    position: relative;
+    animation: slideRight 20s linear infinite; /* slideRight every 600s */
+    animation-play-state: running;
+}
+
+.dino {
+    background-image: url("t-rex.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+}
+
+.cactus {
+    background-image: url("cacti.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    bottom: 0;
+}
+
+.scoreboard {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 24px;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#game-over {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    font-weight: bold;
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+#game-over ul:last-child {
+    font-size: 20px;
+}
