@@ -7,6 +7,10 @@
     }
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 20px; /* Add some padding to the body */
@@ -52,7 +56,7 @@ html, body {
 
 @media (max-width: 768px) {
     .game {
-        width: 90%;
+        width: 80%;
         height: auto;
         max-width: 100%;
     }
