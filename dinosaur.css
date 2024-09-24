@@ -49,6 +49,23 @@ html, body {
     bottom: 0;
 }
 
+@media (max-width: 600px) {
+    .game {
+        width: 90%;
+        height: 200px;
+    }
+
+    .dino {
+        height: 40px;
+        width: 40px;
+    }
+
+    .cactus {
+        width: 30px;
+        height: 60px;
+    }
+}
+
 .scoreboard {
     position: absolute;
     top: 0;
