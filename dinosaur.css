@@ -25,7 +25,7 @@ html, body {
     background-size: auto;
     position: relative;
     animation: slideRight 20s linear infinite; /* slideRight every 600s */
-    animation-play-state: running;
+    animation-play-state: paused;
 }
 
 .dino {
@@ -67,6 +67,16 @@ html, body {
     font-size: 40px;
     font-weight: bold;
     display: none;
+}
+
+#game-start {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
 }
 
 .hidden {

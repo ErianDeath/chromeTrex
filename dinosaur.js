@@ -4,10 +4,17 @@ const score = document.getElementById('score');
 const game = document.querySelector('.game');
 let isJumping = false;
 let isGameover = false;
+let isGameStarted = false;
 
 function keydown(e) {
     if (e.code === 'Space') {
-        if (!isJumping) {
+        if (isGameover) {
+            resetGame();
+        }
+        else if (!isGameStarted) {
+            startGame();
+        }
+        else if (!isJumping) {
            jump();
         }
     }
@@ -18,10 +25,19 @@ window.addEventListener('keydown', function(e) {
     //console.log(e.code);
 });
 
+const gameStartText = document.getElementById('game-start');
+function startGame() {
+    isGameStarted = true;
+    gameOverText.style.display = 'none';
+    gameStartText.style.display = 'none';
+    game.style.animationPlayState = 'running';
+    generateCactus();
+}
+
 let position = 0;
 let count = 0;
 function jump() {
-    if (isJumping || isGameover) return;
+    if (isJumping || isGameover || !isGameStarted) return;
     isJumping = true;
 
     let jumpInterval = setInterval(function() {
@@ -66,18 +82,24 @@ let displayScore = 0;
 let cactusTimers = [];
 
 function updateScore() {
-    if (!isGameover) {
+    if (!isGameover && isGameStarted) {
         displayScore++;
         score.textContent = displayScore;
     }
 }
 
+let lastCactusPosition = 0;
+let minDistGap = 300;
 function generateCactus() {
-    if (isGameover) return;
+    if (isGameover || !isGameStarted) return;
 
     const gameWidth = game.offsetWidth;
     let cactusPosition = gameWidth;
     let randomTime = Math.random() * 3000 + 1000;
+
+    if (cactusPosition - lastCactusPosition< minDistGap) {
+        cactusPosition = lastCactusPosition + minDistGap + gameWidth / 2;
+    }
 
     const cactus = document.createElement('div');
     cactus.classList.add('cactus');
@@ -99,6 +121,7 @@ function generateCactus() {
         else {
             cactusPosition -= 10;
             cactus.style.left = cactusPosition + 'px';
+            lastCactusPosition = cactusPosition;
         }
     }, 20)
 
@@ -113,6 +136,7 @@ generateCactus();
 const gameOverText = document.getElementById('game-over');
 function gameOver() {
     isGameover = true;
+    isGameStarted = false;
     game.style.animationPlayState = 'paused';
     //console.log('Animation state:', document.querySelector('.game').style.animationPlayState); 
     
@@ -120,15 +144,6 @@ function gameOver() {
 
     cactusTimers.forEach(timer => clearInterval(timer));
     cactusTimers = [];
-    
-    window.addEventListener('keydown', handleReset);
-}
-
-function handleReset(e) {
-    if (e.code === 'Space' && isGameover) {
-        resetGame();
-        window.removeEventListener('keydown', handleReset);
-    }
 }
 
 function resetGame() {
@@ -137,6 +152,7 @@ function resetGame() {
 
     isGameover = false;
     isJumping = false;
+    isGameStarted = true;
 
     game.style.animationPlayState = 'running';
     displayScore = 0;
