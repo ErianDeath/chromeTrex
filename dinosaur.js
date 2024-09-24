@@ -20,6 +20,23 @@ function keydown(e) {
     }
 }
 
+
+// Mobile touch event
+function touchStart(e) {
+    if (isGameover) {
+        resetGame();
+    }
+    else if (!isGameStarted) {
+        startGame();
+    }
+    else if (!isJumping) {
+        jump();
+    }
+}
+
+// touch event for mobile
+window.addEventListener('touchstart', touchStart);
+
 window.addEventListener('keydown', function(e) {
     keydown(e);
     //console.log(e.code);
